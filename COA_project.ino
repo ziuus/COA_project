@@ -5,7 +5,7 @@
 #define DHTTYPE DHT11
 
 // Using GPIO 8 and 9 to avoid boot-strapping conflicts on ESP32-C3
-#define LED_NORMAL 8   // Green LED
+
 #define LED_WARNING 6  // Red LED
 
 // Using '15' for timing stability on RISC-V (ESP32-C3/S3)
@@ -18,11 +18,9 @@ void setup() {
   Serial.begin(115200);
   
   // Initialize LED pins
-  pinMode(LED_NORMAL, OUTPUT);
   pinMode(LED_WARNING, OUTPUT);
   
   // Ensure LEDs are off at start
-  digitalWrite(LED_NORMAL, LOW);
   digitalWrite(LED_WARNING, LOW);
 
   pinMode(DHTPIN, INPUT_PULLUP);
@@ -42,10 +40,8 @@ void loop() {
   if (isnan(temperature) || isnan(humidity)) {
     Serial.println(">> [ERROR]: DHT11 Sensor Timeout");
     // Blink both LEDs to indicate hardware error
-    digitalWrite(LED_NORMAL, HIGH);
     digitalWrite(LED_WARNING, HIGH);
     delay(500);
-    digitalWrite(LED_NORMAL, LOW);
     digitalWrite(LED_WARNING, LOW);
     delay(1500); 
     return;
@@ -81,13 +77,12 @@ void loop() {
     digitalWrite(LED_WARNING, HIGH); // Red ON
     digitalWrite(LED_NORMAL, LOW);   // Green OFF
     Serial.println(">> STATUS: [!!! CRITICAL !!!]");
-    Serial.println(">> ALERT: ASM logic triggered high temp warning.");
+    Serial.println(">> ALERT: High temp warning.");
   } else {
-    digitalWrite(LED_WARNING, LOW);  // Red OFF
     digitalWrite(LED_NORMAL, HIGH);  // Green ON
     Serial.println(">> STATUS: [NORMAL]");
   }
 
   Serial.println("-------------------------------");
-  delay(2000); // 2-second delay for DHT11 stability
+  delay(1000); // 2-second delay for DHT11 stability
 }
