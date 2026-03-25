@@ -6,13 +6,13 @@
 
 // Using GPIO 8 and 9 to avoid boot-strapping conflicts on ESP32-C3
 #define LED_NORMAL 8   // Green LED
-#define LED_WARNING 9  // Red LED
+#define LED_WARNING 6  // Red LED
 
 // Using '15' for timing stability on RISC-V (ESP32-C3/S3)
 DHT dht(DHTPIN, DHTTYPE, 15);
 
 // Threshold with decimal (e.g., 35.0)
-float tempThreshold = 35.0;  
+float tempThreshold = 33.0;  
 
 void setup() {
   Serial.begin(115200);
