@@ -78,6 +78,7 @@ void loop() {
     Serial.println(">> STATUS: [!!! CRITICAL !!!]");
     Serial.println(">> ALERT: High temp warning.");
   } else {
+    digitalWrite(LED_WARNING, LOW);  // Red OFF
     Serial.println(">> STATUS: [NORMAL]");
   }
 
