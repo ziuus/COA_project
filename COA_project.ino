@@ -75,11 +75,9 @@ void loop() {
   /* --- HARDWARE INDICATION --- */
   if (is_critical) {
     digitalWrite(LED_WARNING, HIGH); // Red ON
-    digitalWrite(LED_NORMAL, LOW);   // Green OFF
     Serial.println(">> STATUS: [!!! CRITICAL !!!]");
     Serial.println(">> ALERT: High temp warning.");
   } else {
-    digitalWrite(LED_NORMAL, HIGH);  // Green ON
     Serial.println(">> STATUS: [NORMAL]");
   }
 
